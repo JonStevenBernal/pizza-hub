@@ -34,4 +34,12 @@ public class PizzaService {
 		return this.pizzaRepository.findById(idPizza).orElse(null);
 	}
 	
+	public PizzaEntity save(PizzaEntity pizza) {
+		return this.pizzaRepository.save(pizza);
+	}
+	
+	public boolean exists(int idPizza) {
+		return this.pizzaRepository.existsById(idPizza);
+	}
+	
 }
