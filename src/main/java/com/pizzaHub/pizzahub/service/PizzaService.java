@@ -28,6 +28,14 @@ public class PizzaService {
 		return pizzaRepository.findAll();
 	}
 	
+	public List<PizzaEntity> getAvailable() {
+		return this.pizzaRepository.findAllByAvailableTrueOrderByPrice();
+	}
+	
+	public PizzaEntity getByName(String name) {
+		return this.pizzaRepository.findAllByAvailableTrueAndNameIgnoreCase(name);
+	}
+	
 	// Traer solo un registro
 	public PizzaEntity get(int idPizza) {
 		// orElse usamos el optional programacion funcional, indicado que si no encuentra nada retorne null
