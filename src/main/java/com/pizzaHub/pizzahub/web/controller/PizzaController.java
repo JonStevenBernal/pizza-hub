@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pizzaHub.pizzahub.persitence.entity.PizzaEntity;
 import com.pizzaHub.pizzahub.service.PizzaService;
 
+import lombok.extern.log4j.Log4j;
+
 @RestController
 @RequestMapping("/api/pizzas")
 public class PizzaController {
