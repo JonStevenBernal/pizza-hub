@@ -40,9 +40,13 @@ public class PizzaService {
 	public List<PizzaEntity> getWithout(String ingredient) {
 		return this.pizzaRepository.findAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(ingredient);
 	}
+
+	public List<PizzaEntity> getCheapest(double price) {
+		return this.pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(price);
+	}
 	
 	public PizzaEntity getByName(String name) {
-		return this.pizzaRepository.findAllByAvailableTrueAndNameIgnoreCase(name);
+		return this.pizzaRepository.findFirstByAvailableTrueAndNameIgnoreCase(name).orElseThrow( () -> new RuntimeException("La Pizza no existe"));
 	}
 	
 	// Traer solo un registro
