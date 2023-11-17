@@ -2,9 +2,11 @@ package com.pizzaHub.pizzahub.service;
 
 import java.util.List;
 
+import com.pizzaHub.pizzahub.persitence.repository.PizzaPagSortRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pizzaHub.pizzahub.persitence.entity.PizzaEntity;
@@ -16,16 +18,22 @@ public class PizzaService {
 //	private final JdbcTemplate jdbcTemplate;
 	private final PizzaRepository pizzaRepository;
 
+	private final PizzaPagSortRepository pizzaPagSortRepository;
+
 	@Autowired
-	public PizzaService(PizzaRepository pizzaRepository) {
+	public PizzaService(PizzaRepository pizzaRepository, PizzaPagSortRepository pizzaPagSortRepository) {
 		this.pizzaRepository = pizzaRepository;
+		this.pizzaPagSortRepository = pizzaPagSortRepository;
 	}
 	
 	// traer todos los registros
-	public List<PizzaEntity> getAll() {
+	public Page<PizzaEntity> getAll(int page, int elements) {
 		// traer todo lo de la tabla pízza
 //		return this.jdbcTemplate.query("SELECT * FROM pizza WHERE available = 1", new BeanPropertyRowMapper<>(PizzaEntity.class));
-		return pizzaRepository.findAll();
+//		return pizzaRepository.findAll();
+
+		Pageable pageRequest = PageRequest.of(page, elements);
+		return this.pizzaPagSortRepository.findAll(pageRequest);
 	}
 	
 	public List<PizzaEntity> getAvailable() {
