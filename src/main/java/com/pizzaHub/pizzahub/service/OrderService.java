@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import com.pizzaHub.pizzahub.persitence.projection.OrderSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,10 @@ public class OrderService {
 	
 	public List<OrderEntity> getCustomerOrders(String idCustomer) {
 		return this.orderRepository.findCustomerOrders(idCustomer);
+	}
+
+	public OrderSummary getSummary(int orderId) {
+		return this.orderRepository.findSummary(orderId);
 	}
 
 }

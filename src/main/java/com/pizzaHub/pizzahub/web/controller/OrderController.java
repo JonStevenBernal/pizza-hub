@@ -2,6 +2,7 @@ package com.pizzaHub.pizzahub.web.controller;
 
 import java.util.List;
 
+import com.pizzaHub.pizzahub.persitence.projection.OrderSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,11 @@ public class OrderController {
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<List<OrderEntity>> getOutsideOrders(@PathVariable String id) {
 		return ResponseEntity.ok(this.orderService.getCustomerOrders(id));
+	}
+
+	@GetMapping("/summary/{id}")
+	public ResponseEntity<OrderSummary> getSummary(@PathVariable int id) {
+		return ResponseEntity.ok(this.orderService.getSummary(id));
 	}
 	
 
