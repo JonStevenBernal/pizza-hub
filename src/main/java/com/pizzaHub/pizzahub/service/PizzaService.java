@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.pizzaHub.pizzahub.persitence.entity.PizzaEntity;
 import com.pizzaHub.pizzahub.persitence.repository.PizzaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PizzaService {
@@ -77,6 +78,7 @@ public class PizzaService {
 		this.pizzaRepository.deleteById(idPizza);
 	}
 
+	@Transactional
 	public void updatePrice(UpdatePizzaPriceDto dto) {
 		this.pizzaRepository.updatePrice(dto);
 	}
