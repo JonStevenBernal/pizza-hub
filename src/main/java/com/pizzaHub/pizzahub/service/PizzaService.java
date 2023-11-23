@@ -3,6 +3,7 @@ package com.pizzaHub.pizzahub.service;
 import java.util.List;
 
 import com.pizzaHub.pizzahub.persitence.repository.PizzaPagSortRepository;
+import com.pizzaHub.pizzahub.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -74,6 +75,10 @@ public class PizzaService {
 	
 	public void delete(int idPizza) {
 		this.pizzaRepository.deleteById(idPizza);
+	}
+
+	public void updatePrice(UpdatePizzaPriceDto dto) {
+		this.pizzaRepository.updatePrice(dto);
 	}
 	
 	public boolean exists(int idPizza) {
