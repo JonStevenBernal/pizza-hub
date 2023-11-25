@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PizzaEntity implements Serializable {
+public class PizzaEntity extends AuditableEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -44,15 +44,5 @@ public class PizzaEntity implements Serializable {
 	
 	@Column(columnDefinition = "TINYINT", nullable = false)
 	private Boolean available;
-
-	@Column(name = "created_date")
-	@CreatedDate
-	@JsonIgnore
-	private LocalDateTime createdDate;
-
-	@Column(name = "modified_date")
-	@LastModifiedDate
-	@JsonIgnore
-	private LocalDateTime modifiedDate;
 
 }
