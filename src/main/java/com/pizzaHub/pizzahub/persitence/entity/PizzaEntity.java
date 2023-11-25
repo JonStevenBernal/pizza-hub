@@ -1,20 +1,18 @@
 package com.pizzaHub.pizzahub.persitence.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzaHub.pizzahub.persitence.audit.AuditPizzaListener;
+import com.pizzaHub.pizzahub.persitence.audit.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "pizza")
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class, AuditPizzaListener.class} )
 @Getter
 @Setter
 @NoArgsConstructor
@@ -45,4 +43,16 @@ public class PizzaEntity extends AuditableEntity implements Serializable {
 	@Column(columnDefinition = "TINYINT", nullable = false)
 	private Boolean available;
 
+	@Override
+	public String toString() {
+		return "PizzaEntity{" +
+				"idPizza=" + idPizza +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", price=" + price +
+				", vegetarian=" + vegetarian +
+				", vegan=" + vegan +
+				", available=" + available +
+				'}';
+	}
 }
