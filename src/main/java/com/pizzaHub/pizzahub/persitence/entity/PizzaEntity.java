@@ -1,19 +1,20 @@
 package com.pizzaHub.pizzahub.persitence.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "pizza")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,5 +44,15 @@ public class PizzaEntity implements Serializable {
 	
 	@Column(columnDefinition = "TINYINT", nullable = false)
 	private Boolean available;
+
+	@Column(name = "created_date")
+	@CreatedDate
+	@JsonIgnore
+	private LocalDateTime createdDate;
+
+	@Column(name = "modified_date")
+	@LastModifiedDate
+	@JsonIgnore
+	private LocalDateTime modifiedDate;
 
 }
