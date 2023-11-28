@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.pizzaHub.pizzahub.persitence.projection.OrderSummary;
+import com.pizzaHub.pizzahub.service.dto.RandomOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,4 +55,7 @@ public class OrderService {
 		return this.orderRepository.findSummary(orderId);
 	}
 
+	public boolean saveRandomOrder(RandomOrderDto randomOrderDto) {
+		return this.orderRepository.saveRandomOrder(randomOrderDto.getIdCustomer(), randomOrderDto.getMethod());
+	}
 }
