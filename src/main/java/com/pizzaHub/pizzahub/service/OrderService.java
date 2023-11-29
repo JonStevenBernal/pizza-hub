@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.pizzaHub.pizzahub.persitence.entity.OrderEntity;
 import com.pizzaHub.pizzahub.persitence.repository.OrderRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -55,6 +56,7 @@ public class OrderService {
 		return this.orderRepository.findSummary(orderId);
 	}
 
+	@Transactional
 	public boolean saveRandomOrder(RandomOrderDto randomOrderDto) {
 		return this.orderRepository.saveRandomOrder(randomOrderDto.getIdCustomer(), randomOrderDto.getMethod());
 	}
