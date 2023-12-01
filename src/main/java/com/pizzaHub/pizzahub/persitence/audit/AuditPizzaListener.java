@@ -13,7 +13,7 @@ public class AuditPizzaListener {
 
     @PostLoad
     public void postLoad(PizzaEntity entity) {
-        System.out.println("POST LOAD");
+//        System.out.println("POST LOAD");
         this.currentValue = SerializationUtils.clone(entity);
     }
 
@@ -21,9 +21,9 @@ public class AuditPizzaListener {
     @PostUpdate
     public void onPostPersist(PizzaEntity entity) {
 //        System.out.println(entity.toString());
-        System.out.println("POST PERSIST OR UPDATE");
-        System.out.println("OLD VALUE: " + this.currentValue);
-        System.out.println("NEW VALUE: " + entity.toString());
+//        System.out.println("POST PERSIST OR UPDATE");
+//        System.out.println("OLD VALUE: " + this.currentValue);
+//        System.out.println("NEW VALUE: " + entity.toString());
     }
     
     @PreRemove
