@@ -14,7 +14,9 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .anyRequest()
-                .permitAll();
+                .authenticated()
+                .and()
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
