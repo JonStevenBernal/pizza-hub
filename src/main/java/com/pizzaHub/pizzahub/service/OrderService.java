@@ -8,6 +8,7 @@ import java.util.List;
 import com.pizzaHub.pizzahub.persitence.projection.OrderSummary;
 import com.pizzaHub.pizzahub.service.dto.RandomOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.pizzaHub.pizzahub.persitence.entity.OrderEntity;
@@ -47,7 +48,8 @@ public class OrderService {
 		List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
 		return this.orderRepository.findAllByMethodIn(methods);
 	}
-	
+
+	@Secured("ROLE_ADMIN")
 	public List<OrderEntity> getCustomerOrders(String idCustomer) {
 		return this.orderRepository.findCustomerOrders(idCustomer);
 	}
