@@ -12,7 +12,7 @@ public class JwtUtil {
 
     private static String SECRET_KEY = "p1zz4_h>3";
     private static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
-    public String createString(String username) {
+    public String create(String username) {
         return JWT.create()
                 .withSubject(username)
                 .withIssuedAt(new Date())
