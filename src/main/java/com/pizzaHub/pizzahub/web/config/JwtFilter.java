@@ -32,28 +32,29 @@ public class JwtFilter extends OncePerRequestFilter {
 //        1. Validar que sea un Header Authorization valido
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader == null || authHeader.isEmpty() || authHeader.startsWith("Bearer")) {
+        if (authHeader == null || authHeader.isEmpty() || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);
+            return;
         }
 //        2. Validar que el JWT sea valido
-
         String jwt = authHeader.split(" ")[1].trim();
 
-        if (this.jwtUtil.isValid(jwt)) {
+        if (!this.jwtUtil.isValid(jwt)) {
             filterChain.doFilter(request, response);
+            return;
         }
 //        3. Cargar el usurio de UserDetailsService
         String username = this.jwtUtil.getUsername(jwt);
         User user = (User) this.userDetailsService.loadUserByUsername(username);
 
 //        4. Cargar al usuario en el contexto de seguridad
-
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 user.getUsername(), user.getPassword(), user.getAuthorities()
         );
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         System.out.println(authenticationToken);
+        System.out.println("JwtFilter");
         filterChain.doFilter(request, response);
     }
 }
