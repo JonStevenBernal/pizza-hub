@@ -23,9 +23,9 @@ public interface PizzaRepository extends ListCrudRepository<PizzaEntity, Integer
 	List<PizzaEntity> findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(double price);
 	int countByVeganTrue();
 
-	@Query(value = "UPDATE pizza " +
-			"SET price = :#{#newPizzaPrice.newPrice} " +
-			"WHERE id_pizza = :#{#newPizzaPrice.pizzaId}", nativeQuery = true)
+//	@Query(value = "UPDATE pizza " +
+//			"SET price = :#{#newPizzaPrice.newPrice} " +
+//			"WHERE id_pizza = :#{#newPizzaPrice.pizzaId}", nativeQuery = true)
 //	void updatePrice(@Param("idPizza") int idPizza, @Param("newPrice") double newPrice);
 	@Modifying
 	void updatePrice(@Param("newPizzaPrice") UpdatePizzaPriceDto newPizzaPrice);
